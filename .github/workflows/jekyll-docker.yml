@@ -8,9 +8,7 @@ on:
 
 jobs:
   build:
-
-    # Run on macOS so the workflow uses the macOS toolchain (Xcode is available here for iOS work)
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
@@ -21,16 +19,29 @@ jobs:
         ruby-version: '3.x'
         bundler-cache: true
 
-    - name: Install dependencies
+    - name: Debug: print environment
       run: |
+        set -euxo pipefail
+        echo "Runner: $(uname -a)"
+        ruby --version || true
+        gem --version || true
+        bundler --version || gem install bundler --no-document && bundler --version || true
+        which jekyll || true
+        bundle env || true
+
+    - name: Install dependencies (robust)
+      run: |
+        set -euxo pipefail
         if [ -f Gemfile ]; then
-          bundle install
+          # parallel installs and automatic retries are more robust than --verbose
+          bundle install --jobs=4 --retry=3
         else
-          gem install jekyll bundler
+          gem install jekyll bundler --no-document
         fi
 
     - name: Build the site
       run: |
+        set -euxo pipefail
         mkdir -p _site
         bundle exec jekyll build --future --destination _site
 
