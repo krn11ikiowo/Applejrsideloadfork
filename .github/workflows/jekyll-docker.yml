@@ -9,12 +9,33 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    # Run on macOS so the workflow uses the macOS toolchain (Xcode is available here for iOS work)
+    runs-on: macos-latest
 
     steps:
     - uses: actions/checkout@v4
-    - name: Build the site in the jekyll/builder container
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.x'
+        bundler-cache: true
+
+    - name: Install dependencies
       run: |
-        docker run \
-        -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
-        jekyll/builder:latest /bin/bash -c "chmod -R 777 /srv/jekyll && jekyll build --future"
+        if [ -f Gemfile ]; then
+          bundle install
+        else
+          gem install jekyll bundler
+        fi
+
+    - name: Build the site
+      run: |
+        mkdir -p _site
+        bundle exec jekyll build --future --destination _site
+
+    - name: Upload site artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: site
+        path: _site
