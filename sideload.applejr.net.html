@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#08090a" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="description" content="AppleJr browser sideloading for iPhone and iPad." />
+    <meta name="author" content="AppleJr" />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico?v=applejr-20260718">
+    <link rel="apple-touch-icon" href="/applejr-mark.svg" />
+    <title>AppleJr Sideloading</title>
+    <script type="module" crossorigin src="/assets/index-CsuTt6N4.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BEsiCAzB.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  
+  <!-- APPLEJR_TOP_DOCUMENT_AD_V1_START -->
+  <div
+    id="applejr-top-document-ad"
+    style="width:320px;height:50px;min-height:50px;margin:0 auto;overflow:hidden;visibility:hidden;background:transparent;"
+  >
+<script>
+  atOptions = {
+    'key' : '6123bec72972488e7558d896054754e6',
+    'format' : 'iframe',
+    'height' : 50,
+    'width' : 320,
+    'params' : {}
+  };
+</script>
+<script src="https://washwidespreadblot.com/6123bec72972488e7558d896054754e6/invoke.js"></script>
+  </div>
+
+  <script>
+    (() => {
+      const sourceId = 'applejr-top-document-ad';
+      const targetId = 'applejr-social-ad-slot';
+      let attempts = 0;
+      const maxAttempts = 200;
+
+      const moveAdvertisement = () => {
+        const advertisement = document.getElementById(sourceId);
+        const target = document.getElementById(targetId);
+
+        if (!advertisement) {
+          return;
+        }
+
+        if (target) {
+          target.replaceChildren(advertisement);
+          advertisement.style.visibility = 'visible';
+          advertisement.style.margin = '0 auto';
+          return;
+        }
+
+        attempts += 1;
+
+        if (attempts < maxAttempts) {
+          window.setTimeout(moveAdvertisement, 50);
+        } else {
+          advertisement.style.visibility = 'visible';
+        }
+      };
+
+      if (document.readyState === 'loading') {
+        document.addEventListener(
+          'DOMContentLoaded',
+          moveAdvertisement,
+          { once: true },
+        );
+      } else {
+        moveAdvertisement();
+      }
+    })();
+  </script>
+  <!-- APPLEJR_TOP_DOCUMENT_AD_V1_END -->
+
+</body>
+</html>
