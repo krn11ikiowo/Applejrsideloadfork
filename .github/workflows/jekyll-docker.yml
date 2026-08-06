@@ -19,7 +19,7 @@ jobs:
         ruby-version: '3.x'
         bundler-cache: true
 
-    - name: Debug: print environment
+    - name: why is github whining bro
       run: |
         set -euxo pipefail
         echo "Runner: $(uname -a)"
